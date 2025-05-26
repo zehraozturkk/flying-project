@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyTicket - Giriş</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>✈️ FlyTicket</h1>
+            <p>Hızlı ve Güvenli Bilet Rezervasyonu</p>
+        </div>
+
+        <div id="alert" class="hidden"></div>
+
+        <!-- Login Type Selection -->
+        <div class="login-type-selection" id="loginTypeSelection">
+            <h3>Giriş Türünü Seçin</h3>
+            <div class="login-type-buttons">
+                <button type="button" class="btn-type user-type" id="userTypeBtn">
+                    <span class="icon">👤</span>
+                    <span class="text">Kullanıcı Girişi</span>
+                    <span class="description">Bilet arama ve rezervasyon</span>
+                </button>
+                <button type="button" class="btn-type admin-type" id="adminTypeBtn">
+                    <span class="icon">⚙️</span>
+                    <span class="text">Admin Girişi</span>
+                    <span class="description">Sistem yönetimi</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Form (Hidden by default) -->
+        <form id="loginForm" class="hidden">
+            <div class="login-header">
+                <h3 id="loginTitle">Kullanıcı Girişi</h3>
+                <button type="button" id="backBtn" class="back-btn">← Geri</button>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Adresi</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn-login" id="loginBtn">
+                <span id="loginText">Giriş Yap</span>
+                <span id="loginLoader" class="loading hidden"></span>
+            </button>
+
+            <!-- Sample Credentials Display -->
+            <div class="sample-credentials" id="sampleCredentials">
+                <p class="sample-title">Örnek Giriş Bilgileri:</p>
+                <div class="credential-item">
+                    <strong id="sampleEmail">test@example.com</strong><br>
+                    <span id="samplePassword">123456</span>
+                </div>
+                <button type="button" class="btn-fill-sample" id="fillSampleBtn">Bilgileri Doldur</button>
+            </div>
+        </form>
+
+        <div class="register-link">
+            <p>Hesabınız yok mu? <a href="#" id="registerLink">Kayıt Ol</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

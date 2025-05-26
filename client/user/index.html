@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyTicket - Uçuş Arama</title>
+    <link rel="stylesheet" href="../shared/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="user-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>✈️ FlyTicket</h1>
+                    <p>Hızlı ve Güvenli Bilet Rezervasyonu</p>
+                </div>
+                <div class="user-info">
+                    <span id="userName">Hoş geldiniz!</span>
+                    <button class="btn-logout" id="logoutBtn">Çıkış</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="user-main">
+        <div class="container">
+            <!-- Flight Search Section -->
+            <section class="search-section">
+                <div class="search-card">
+                    <h2>✈️ Uçuş Ara</h2>
+                    <form id="searchForm" class="search-form">
+                        <div class="search-row">
+                            <div class="search-group">
+                                <label for="searchFromCity">Nereden</label>
+                                <select id="searchFromCity" required>
+                                    <option value="">Kalkış şehri seçin</option>
+                                    <!-- Cities will be loaded via JS -->
+                                </select>
+                            </div>
+                            <div class="search-group">
+                                <label for="searchToCity">Nereye</label>
+                                <select id="searchToCity" required>
+                                    <option value="">Varış şehri seçin</option>
+                                    <!-- Cities will be loaded via JS -->
+                                </select>
+                            </div>
+                            <div class="search-group">
+                                <label for="searchDate">Tarih</label>
+                                <input type="date" id="searchDate" required>
+                            </div>
+                            <div class="search-group">
+                                <button type="submit" class="btn-search">
+                                    🔍 Uçuş Ara
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <h2>Uçuş Sonuçları</h2>
+                <div class="flights-container" id="flightsContainer">
+                    <!-- Flight cards will be loaded via JS -->
+                </div>
+            </section>
+
+            <!-- My Bookings Section -->
+            <section class="bookings-section">
+                <div class="section-header">
+                    <h2>Rezervasyonlarım</h2>
+                    <button class="btn-secondary" id="refreshBookingsBtn">🔄 Yenile</button>
+                </div>
+                <div class="bookings-container" id="bookingsContainer">
+                    <!-- User bookings will be loaded via JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Booking Modal -->
+    <div class="modal hidden" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✈️ Bilet Rezervasyonu</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="flight-details" id="modalFlightDetails">
+                    <!-- Flight details will be inserted here -->
+                </div>
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passengerName">Ad</label>
+                            <input type="text" id="passengerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengerSurname">Soyad</label>
+                            <input type="text" id="passengerSurname" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passengerEmail">Email</label>
+                        <input type="email" id="passengerEmail" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelBookingBtn">İptal</button>
+                        <button type="submit" class="btn-primary">Rezervasyon Yap</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal hidden" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✅ Rezervasyon Onayı</h3>
+                <button class="modal-close" id="closeConfirmationBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message">
+                    <div class="success-icon">🎉</div>
+                    <h3>Rezervasyonunuz Başarılı!</h3>
+                    <p>Bilet detaylarınız email adresinize gönderilmiştir.</p>
+                </div>
+                <div class="ticket-details" id="ticketDetails">
+                    <!-- Ticket details will be inserted here -->
+                </div>
+                <div class="form-actions">
+                    <button class="btn-primary" id="downloadTicketBtn">🎫 E-Bilet İndir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Yükleniyor...</p>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert hidden" id="alert"></div>
+
+    <script src="../shared/auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

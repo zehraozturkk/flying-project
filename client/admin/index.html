@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyTicket - Admin Panel</title>
+    <link rel="stylesheet" href="../shared/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>✈️ FlyTicket Admin</h1>
+                </div>
+                <div class="admin-info">
+                    <span id="adminName">Admin Panel</span>
+                    <button class="btn-logout" id="logoutBtn">Çıkış</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="container">
+            <!-- Dashboard Stats -->
+            <section class="stats-section">
+                <h2>Dashboard İstatistikleri</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">✈️</div>
+                        <div class="stat-info">
+                            <h3 id="totalFlights">-</h3>
+                            <p>Toplam Uçuş</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎫</div>
+                        <div class="stat-info">
+                            <h3 id="totalBookings">-</h3>
+                            <p>Toplam Rezervasyon</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3 id="totalRevenue">-</h3>
+                            <p>Toplam Gelir</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <h3 id="todayBookings">-</h3>
+                            <p>Bugünkü Rezervasyon</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Flight Management -->
+            <section class="flights-section">
+                <div class="section-header">
+                    <h2>Uçuş Yönetimi</h2>
+                    <button class="btn-primary" id="addFlightBtn">+ Yeni Uçuş Ekle</button>
+                </div>
+
+                <!-- Add Flight Form (Hidden by default) -->
+                <div class="add-flight-form hidden" id="addFlightForm">
+                    <h3>Yeni Uçuş Ekle</h3>
+                    <form id="flightForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fromCity">Kalkış Şehri</label>
+                                <select id="fromCity" required>
+                                    <option value="">Şehir Seçin</option>
+                                    <!-- Cities will be loaded via JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="toCity">Varış Şehri</label>
+                                <select id="toCity" required>
+                                    <option value="">Şehir Seçin</option>
+                                    <!-- Cities will be loaded via JS -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="departureTime">Kalkış Zamanı</label>
+                                <input type="datetime-local" id="departureTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="arrivalTime">Varış Zamanı</label>
+                                <input type="datetime-local" id="arrivalTime" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Fiyat (₺)</label>
+                                <input type="number" id="price" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="seatsTotal">Toplam Koltuk</label>
+                                <input type="number" id="seatsTotal" min="1" max="300" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancelFlightBtn">İptal</button>
+                            <button type="submit" class="btn-primary">Uçuş Ekle</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Flights Table -->
+                <div class="flights-table-container">
+                    <table class="flights-table" id="flightsTable">
+                        <thead>
+                            <tr>
+                                <th>Uçuş ID</th>
+                                <th>Kalkış</th>
+                                <th>Varış</th>
+                                <th>Kalkış Zamanı</th>
+                                <th>Varış Zamanı</th>
+                                <th>Fiyat</th>
+                                <th>Koltuk</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="flightsTableBody">
+                            <!-- Flights will be loaded via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Bookings Management -->
+            <section class="bookings-section">
+                <div class="section-header">
+                    <h2>Rezervasyon Yönetimi</h2>
+                    <button class="btn-secondary" id="refreshBookingsBtn">🔄 Yenile</button>
+                </div>
+
+                <div class="bookings-table-container">
+                    <table class="bookings-table" id="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>Bilet ID</th>
+                                <th>Yolcu Adı</th>
+                                <th>Email</th>
+                                <th>Uçuş</th>
+                                <th>Tarih</th>
+                                <th>Fiyat</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Bookings will be loaded via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Yükleniyor...</p>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert hidden" id="alert"></div>
+
+    <script src="../shared/auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

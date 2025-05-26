@@ -1,0 +1,26 @@
+# node_modules klasörü - asla commit etme
+node_modules/
+
+# .env dosyası - gizli bilgiler içerir
+.env
+
+# Log dosyaları
+*.log
+logs/
+
+# OS ve IDE dosyaları
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Paket kilit dosyası (opsiyonel - sadece biri kullanılır)
+package-lock.json
+# yarn.lock
+
+# Test coverage dosyaları
+coverage/
+
+# Derlenmiş dosyalar
+dist/
+build/
