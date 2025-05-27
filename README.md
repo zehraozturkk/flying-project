@@ -37,11 +37,13 @@ To set up and run the project on your local machine, follow these steps:
 
     ```bash
     cd flying-project
+    ```
 
     ```bash
     cd ../server
     node scripts/setup.js  // for database structure
     npm start
+    ```
    
 
 3.  **Start the application:**
