@@ -1,0 +1,17 @@
+# Ortak ignore
+node_modules/
+.env
+*.log
+logs/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+package-lock.json
+coverage/
+dist/
+build/
+
+# Sadece server içindeki node_modules
+server/node_modules/
+client/node_modules/

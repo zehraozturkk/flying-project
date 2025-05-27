@@ -26,6 +26,11 @@ app.get('/', (req, res) => {
 
 app.use('/auth', require('./routes/user.routes'));
 
+app.use('/api', require('./routes/flight.routes')); // routes dosyanızın yolunu ayarlayın
+app.use('/api', require('./routes/cities.routes'));
+app.use('/api', require('./routes/ticket.routes'));
+
+
 
 const PORT = 3000;
 app.listen(PORT, () => {

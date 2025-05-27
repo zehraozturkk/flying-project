@@ -68,10 +68,11 @@
                     <button class="btn-primary" id="addFlightBtn">+ Yeni Uçuş Ekle</button>
                 </div>
 
-                <!-- Add Flight Form (Hidden by default) -->
-                <div class="add-flight-form hidden" id="addFlightForm">
-                    <h3>Yeni Uçuş Ekle</h3>
+                <!-- Add/Edit Flight Form (Hidden by default) -->
+                <div class="add-flight-form hidden" id="flightFormContainer">
+                    <h3 id="formTitle">Yeni Uçuş Ekle</h3>
                     <form id="flightForm">
+                        <input type="hidden" id="flightId" value="">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fromCity">Kalkış Şehri</label>
@@ -110,7 +111,7 @@
                         </div>
                         <div class="form-actions">
                             <button type="button" class="btn-secondary" id="cancelFlightBtn">İptal</button>
-                            <button type="submit" class="btn-primary">Uçuş Ekle</button>
+                            <button type="submit" class="btn-primary" id="submitBtn">Uçuş Ekle</button>
                         </div>
                     </form>
                 </div>

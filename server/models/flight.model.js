@@ -4,7 +4,7 @@ const db = require('../config/db');
 const createFlightsTable = () => {
   const query = `
     CREATE TABLE IF NOT EXISTS flights(
-      flight_id VARCHAR(50) PRIMARY KEY,
+      flight_id INT  AUTO_INCREMENT PRIMARY KEY,
       from_city VARCHAR(50) NOT NULL,
       to_city VARCHAR(50) NOT NULL,
       departure_time DATETIME NOT NULL,

@@ -4,16 +4,14 @@ const db = require('../config/db');
 const createTicketsTable = () => {
   const query = `
     CREATE TABLE IF NOT EXISTS tickets(
-      ticket_id VARCHAR(50) PRIMARY KEY,
+      ticket_id INT AUTO_INCREMENT PRIMARY KEY,
       passenger_name VARCHAR(50) NOT NULL,
-      passenger_surname VARCHAR(50) NOT NULL,
       passenger_email VARCHAR(100) NOT NULL,
-      flight_id VARCHAR(50) NOT NULL,
+      flight_id INT NOT NULL,
       seat_number VARCHAR(10) NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      FOREIGN KEY (flight_id) REFERENCES flights(flight_id),
-      UNIQUE INDEX idx_flight_seat (flight_id, seat_number)
+      FOREIGN KEY (flight_id) REFERENCES flights(flight_id)
     );
   `;
 
