@@ -231,95 +231,83 @@ const getAllTickets = (req, res) => {
 };
 
 // Bilet iptal etme
-const cancelTicket = (req, res) => {
-    const { ticketId } = req.params;
-    const { passenger_email } = req.body;
+// ticket.controller.js - Callback tabanlı MySQL için
 
-    if (!ticketId) {
-        return res.status(400).json({ 
-            error: "Bilet ID gerekli", 
-            success: false 
-        });
-    }
-
-    // Önce biletin var olup olmadığını ve kullanıcıya ait olup olmadığını kontrol et
-    const checkTicketQuery = `
-        SELECT t.ticket_id, t.flight_id, t.passenger_email,
-               DATE_FORMAT(f.departure_time, '%Y-%m-%d %H:%i') as departure_time
-        FROM tickets t
-        JOIN flights f ON t.flight_id = f.flight_id
-        WHERE t.ticket_id = ?
-    `;
-
-    db.query(checkTicketQuery, [ticketId], (err, ticketResult) => {
-        if (err) {
-            console.error("Check ticket error:", err);
-            return res.status(500).json({ 
-                error: "Veritabanı hatası", 
-                success: false 
+const cancelTicket = async (req, res) => {
+    try {
+        const { ticketId } = req.params;
+        
+        if (!ticketId) {
+            return res.status(400).json({
+                success: false,
+                error: 'Bilet ID gerekli'
             });
         }
 
-        if (ticketResult.length === 0) {
-            return res.status(404).json({ 
-                error: "Bilet bulunamadı", 
-                success: false 
+        // Promise wrapper fonksiyonu
+        const queryAsync = (sql, params) => {
+            return new Promise((resolve, reject) => {
+                db.query(sql, params, (err, results) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(results);
+                    }
+                });
+            });
+        };
+
+        // Önce bileti bul
+        const findTicketQuery = `
+            SELECT t.*, f.seats_available, f.seats_total 
+            FROM tickets t 
+            JOIN flights f ON t.flight_id = f.flight_id 
+            WHERE t.ticket_id = ?
+        `;
+        
+        const ticketResult = await queryAsync(findTicketQuery, [ticketId]);
+        
+        if (!ticketResult || ticketResult.length === 0) {
+            return res.status(404).json({
+                success: false,
+                error: 'Bilet bulunamadı'
             });
         }
 
         const ticket = ticketResult[0];
-
-        // Kullanıcı kontrolü (passenger_email parametresi verilmişse)
-        if (passenger_email && ticket.passenger_email !== passenger_email) {
-            return res.status(403).json({ 
-                error: "Bu bilet size ait değil", 
-                success: false 
-            });
-        }
-
-        // Geçmiş uçuş kontrolü (opsiyonel)
-        const now = new Date();
-        const departureTime = new Date(ticket.departure_time);
         
-        if (departureTime < now) {
-            return res.status(400).json({ 
-                error: "Geçmiş uçuşların bileti iptal edilemez", 
-                success: false 
+        // Bileti sil
+        const cancelQuery = `DELETE FROM tickets WHERE ticket_id = ?`;
+        const cancelResult = await queryAsync(cancelQuery, [ticketId]);
+        
+        if (cancelResult.affectedRows === 0) {
+            return res.status(400).json({
+                success: false,
+                error: 'Bilet iptal edilemedi'
             });
         }
 
-        // Bileti sil
-        const deleteTicketQuery = "DELETE FROM tickets WHERE ticket_id = ?";
+        // Uçuştaki müsait koltuk sayısını artır
+        const updateSeatsQuery = `
+            UPDATE flights 
+            SET seats_available = seats_available + 1 
+            WHERE flight_id = ? AND seats_available < seats_total
+        `;
+        await queryAsync(updateSeatsQuery, [ticket.flight_id]);
 
-        db.query(deleteTicketQuery, [ticketId], (err, deleteResult) => {
-            if (err) {
-                console.error("Delete ticket error:", err);
-                return res.status(500).json({ 
-                    error: "Bilet silinirken hata oluştu", 
-                    success: false 
-                });
-            }
-
-            // Uçuştaki müsait koltuk sayısını artır
-            const updateSeatsQuery = "UPDATE flights SET seats_available = seats_available + 1 WHERE flight_id = ?";
-
-            db.query(updateSeatsQuery, [ticket.flight_id], (err, updateResult) => {
-                if (err) {
-                    console.error("Update seats error:", err);
-                    // Bilet silindi ama koltuk sayısı güncellenemedi
-                    return res.status(500).json({ 
-                        error: "Bilet iptal edildi ancak koltuk sayısı güncellenemedi", 
-                        success: false 
-                    });
-                }
-
-                res.status(200).json({ 
-                    message: "Bilet başarıyla iptal edildi", 
-                    success: true
-                });
-            });
+        res.json({
+            success: true,
+            message: 'Bilet başarıyla iptal edildi',
+            ticket_id: ticketId
         });
-    });
+
+    } catch (error) {
+        console.error('Bilet iptal hatası:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Bilet iptal edilirken bir hata oluştu: ' + error.message
+        });
+    }
 };
 
 // Belirli bir uçuşun biletlerini getirme

@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyTicket - Uçak Biletinizi Bulun</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">✈️ FlyTicket</a>
+            
+            <div class="nav-buttons" id="navButtons">
+                <!-- Giriş yapmamış kullanıcılar için -->
+                <div id="guestNav">
+                    <a href="../login/index.html" class="btn btn-login">Giriş Yap</a>
+                </div>
+                
+                <!-- Giriş yapmış kullanıcılar için -->
+                <div id="userNav" class="hidden">
+                    <div class="user-status">
+                        <span class="user-welcome" id="userWelcome">Hoş geldiniz!</span>
+                        <button class="btn btn-logout" id="logoutBtn">Çıkış</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Hayalinizdeki Yolculuk Bir Tık Uzakta</h1>
+            <p>En uygun fiyatlı uçak biletlerini bulun ve anında rezervasyon yapın</p>
+            
+            <!-- Search Form -->
+            <div class="search-section">
+                <form class="search-form" id="searchForm">
+                    <div class="form-group">
+                        <label for="fromCity">Nereden</label>
+                        <select id="fromCity" required>
+                            <option value="">Şehir Seçin</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="toCity">Nereye</label>
+                        <select id="toCity" required>
+                            <option value="">Şehir Seçin</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="departureDate">Gidiş Tarihi</label>
+                        <input type="date" id="departureDate" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-search" id="searchBtn">
+                        Uçuş Ara
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading -->
+    <div class="loading hidden" id="loadingSection">
+        <div class="spinner"></div>
+        <p>Uçuşlar aranıyor...</p>
+    </div>
+
+    <!-- Results Section -->
+    <section class="results-section hidden" id="resultsSection">
+        <div class="results-header">
+            <h2 id="resultsTitle">Bulunan Uçuşlar</h2>
+            <p class="results-info" id="resultsInfo">Arama sonuçlarınız</p>
+        </div>
+        
+        <div class="flights-container" id="flightsContainer">
+            <!-- Uçuşlar buraya yüklenecek -->
+        </div>
+    </section>
+
+    <!-- No Results -->
+    <div class="no-results hidden" id="noResults">
+        <div class="no-results-icon">😔</div>
+        <h3>Üzgünüz, aradığınız kriterlerde uçuş bulunamadı</h3>
+        <p>Farklı tarih veya şehirler deneyebilirsiniz</p>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert hidden" id="alert"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

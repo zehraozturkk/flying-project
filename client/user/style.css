@@ -581,3 +581,129 @@
         max-width: none;
     }
 }
+
+.seat-selection-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.seat-legend {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.seat-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+    display: inline-block;
+}
+
+.seat-icon.available {
+    background: #e8f5e8;
+    border-color: #28a745;
+}
+
+.seat-icon.occupied {
+    background: #f8d7da;
+    border-color: #dc3545;
+    cursor: not-allowed;
+}
+
+.seat-icon.selected {
+    background: #d1ecf1;
+    border-color: #007bff;
+}
+
+.seat-map {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 koltuk genişlik (A-F) */
+    gap: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #eee;
+}
+
+.seat-row {
+    display: contents;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8f9fa;
+}
+
+.seat.available {
+    background: #e8f5e8;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.seat.available:hover {
+    background: #d4edda;
+    transform: scale(1.05);
+}
+
+.seat.occupied {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+    cursor: not-allowed;
+}
+
+.seat.selected {
+    background: #d1ecf1;
+    border-color: #007bff;
+    color: #004085;
+    transform: scale(1.1);
+}
+
+.seat-aisle {
+    width: 20px;
+}
+
+.selected-seat-info {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 4px;
+    border-left: 4px solid #007bff;
+}
+
+@media (max-width: 600px) {
+    .seat-map {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .seat {
+        width: 35px;
+        height: 35px;
+        font-size: 0.7rem;
+    }
+}

@@ -515,3 +515,254 @@
         gap: 0.3rem;
     }
 }
+
+/* Rezervasyon Modalı ve Detay Stilleri */
+
+/* Modal Stilleri */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f7fafc;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #2d3748;
+    font-size: 1.25rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #718096;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #edf2f7;
+    color: #4a5568;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.detail-row {
+    margin-bottom: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.detail-row strong {
+    color: #4a5568;
+    font-weight: 600;
+    min-width: 140px;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    text-align: right;
+    background: #f7fafc;
+    border-radius: 0 0 12px 12px;
+}
+
+.btn-secondary {
+    background: #edf2f7;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #e2e8f0;
+    color: #2d3748;
+}
+
+/* Rezervasyon Tablosu Özel Stilleri */
+.ticket-id {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.passenger-name {
+    font-weight: 500;
+    color: #2d3748;
+}
+
+.passenger-email {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.flight-info {
+    min-width: 200px;
+}
+
+.flight-route {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.flight-time, .flight-id {
+    display: block;
+    color: #718096;
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+}
+
+.booking-date {
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.price {
+    font-weight: 600;
+    color: #38a169;
+}
+
+.actions {
+    white-space: nowrap;
+}
+
+.btn-cancel {
+    background: #f56565;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 8px;
+    transition: background 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #e53e3e;
+}
+
+.btn-view-details {
+    background: #48bb78;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s ease;
+}
+
+.btn-view-details:hover {
+    background: #38a169;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.empty-state {
+    padding: 40px;
+    color: #718096;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 15px;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .detail-row strong {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .btn-cancel,
+    .btn-view-details {
+        width: 100%;
+        margin-right: 0;
+    }
+}

@@ -53,68 +53,12 @@
                 <span id="loginText">Giriş Yap</span>
                 <span id="loginLoader" class="loading hidden"></span>
             </button>
-
-            <!-- Sample Credentials Display -->
-            <div class="sample-credentials" id="sampleCredentials">
-                <p class="sample-title">Örnek Giriş Bilgileri:</p>
-                <div class="credential-item">
-                    <strong id="sampleEmail">test@example.com</strong><br>
-                    <span id="samplePassword">123456</span>
-                </div>
-                <button type="button" class="btn-fill-sample" id="fillSampleBtn">Bilgileri Doldur</button>
-            </div>
         </form>
 
         <div class="register-link">
             <p>Hesabınız yok mu? <a href="#" id="registerLink">Kayıt Ol</a></p>
         </div>
     </div>
-
-    <div class="add-flight-form hidden" id="addFlightForm">
-    <h3 id="formTitle">Yeni Uçuş Ekle</h3>
-    <form id="flightForm">
-        <input type="hidden" id="editingFlightId" value="">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="fromCity">Kalkış Şehri</label>
-                <select id="fromCity" required>
-                    <option value="">Şehir Seçin</option>
-                    <!-- Cities will be loaded via JS -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="toCity">Varış Şehri</label>
-                <select id="toCity" required>
-                    <option value="">Şehir Seçin</option>
-                    <!-- Cities will be loaded via JS -->
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="departureTime">Kalkış Zamanı</label>
-                <input type="datetime-local" id="departureTime" required>
-            </div>
-            <div class="form-group">
-                <label for="arrivalTime">Varış Zamanı</label>
-                <input type="datetime-local" id="arrivalTime" required>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="price">Fiyat (₺)</label>
-                <input type="number" id="price" min="0" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="seatsTotal">Toplam Koltuk</label>
-                <input type="number" id="seatsTotal" min="1" max="300" required>
-            </div>
-        </div>
-        <div class="form-actions">
-            <button type="button" class="btn-secondary" id="cancelFlightBtn">İptal</button>
-            <button type="submit" class="btn-primary" id="submitFlightBtn">Uçuş Ekle</button>
-        </div>
-    </form>
 </div>  
 
     <script src="script.js"></script>

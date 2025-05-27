@@ -13,7 +13,7 @@ router.post('/tickets', createTicket);
 
 router.get('/tickets/user', getUserTickets);
 
-router.get('/tickets', getAllTickets);
+router.get('/all', getAllTickets);
 
 router.delete('/tickets/:ticketId', cancelTicket);
 
