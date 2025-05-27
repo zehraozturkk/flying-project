@@ -40,10 +40,10 @@ To set up and run the project on your local machine, follow these steps:
 
     # Client dependencies
     cd client
-    npm install
 
     # Server dependencies
     cd ../server
+    node scripts/setup.js  // for database structure
     npm install
     ```
 
