@@ -1,4 +1,4 @@
-// Enhanced User Dashboard Script
+// Enhanced User Dashboard Script with Seat Selection
 console.log('User Dashboard loaded');
 
 // API Base URL
@@ -368,6 +368,7 @@ async function openBookingModal(flightId) {
         // Pre-fill user data
         document.getElementById('passengerName').value = userData.username || '';
         document.getElementById('passengerEmail').value = userData.email || '';
+        document.getElementById('seatNumber').value = '';
         
         elements.bookingModal.classList.remove('hidden');
         
@@ -392,21 +393,27 @@ async function handleBookingSubmit(e) {
     }
     
     const passengerName = document.getElementById('passengerName').value;
-    const passengerSurname = document.getElementById('passengerSurname').value;
     const passengerEmail = document.getElementById('passengerEmail').value;
+    const seatNumber = document.getElementById('seatNumber').value;
     
-    const fullName = `${passengerName} ${passengerSurname}`.trim();
-    
-    if (!fullName || !passengerEmail) {
+    if (!passengerName || !passengerEmail || !seatNumber) {
         showAlert('Lütfen tüm alanları doldurun', 'error');
+        return;
+    }
+    
+    // Koltuk numarası formatı kontrolü
+    const seatRegex = /^[1-9]\d*[A-F]$/i;
+    if (!seatRegex.test(seatNumber)) {
+        showAlert('Koltuk numarası formatı hatalı (örn: 1A, 12B)', 'error');
         return;
     }
     
     try {
         const bookingData = {
             flight_id: currentFlight.flight_id,
-            passenger_name: fullName,
+            passenger_name: passengerName,
             passenger_email: passengerEmail,
+            seat_number: seatNumber.toUpperCase(),
             user_id: userData.user_id
         };
         
@@ -441,7 +448,7 @@ function showConfirmationModal(ticket) {
             <p><strong>Güzergah:</strong> ${ticket.flight_info ? ticket.flight_info.from_city + ' → ' + ticket.flight_info.to_city : currentFlight.from_city_name + ' → ' + currentFlight.to_city_name}</p>
             <p><strong>Tarih:</strong> ${departureTime.toLocaleDateString('tr-TR')}</p>
             <p><strong>Saat:</strong> ${departureTime.toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'})}</p>
-            ${ticket.seat_number ? `<p><strong>Koltuk:</strong> ${ticket.seat_number}</p>` : ''}
+            <p><strong>Koltuk:</strong> ${ticket.seat_number}</p>
         </div>
     `;
     
@@ -543,7 +550,7 @@ function displayUserBookings(tickets) {
                         <div class="booking-detail-label">Yolcu</div>
                         <div class="booking-detail-value">
                             ${ticket.passenger_name}
-                            ${ticket.seat_number ? `<br>Koltuk: ${ticket.seat_number}` : ''}
+                            ${ticket.seat_number ? `<br><strong>Koltuk: ${ticket.seat_number}</strong>` : ''}
                         </div>
                     </div>
                 </div>

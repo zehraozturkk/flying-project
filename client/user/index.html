@@ -6,6 +6,49 @@
     <title>FlyTicket - Uçuş Arama</title>
     <link rel="stylesheet" href="../shared/style.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modal için ek stiller */
+        .modal-large .modal-content {
+            max-width: 800px;
+            max-height: 95vh;
+        }
+        
+        .passenger-info-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .passenger-info-section h4 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Responsive koltuk haritası */
+        @media (max-width: 768px) {
+            .modal-large .modal-content {
+                max-width: 95%;
+                margin: 1rem;
+            }
+            
+            .seat-map {
+                max-width: 300px;
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .seat {
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -84,20 +127,24 @@
 
     <!-- Booking Modal -->
     <div class="modal hidden" id="bookingModal">
-        <div class="modal-content">
+        <div class="modal-content modal-large">
             <div class="modal-header">
                 <h3>✈️ Bilet Rezervasyonu</h3>
                 <button class="modal-close" id="closeModalBtn">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="flight-details" id="modalFlightDetails">
-                    <!-- Flight details will be inserted here -->
+                    <!-- Flight details and seat map will be inserted here -->
                 </div>
                 <form id="bookingForm" class="booking-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="passengerName">Ad</label>
                             <input type="text" id="passengerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="seatNumber">Koltuk Numarası</label>
+                            <input type="text" id="seatNumber" required placeholder="Örn: 1A, 12B">
                         </div>
                     </div>
                     <div class="form-group">
@@ -106,7 +153,9 @@
                     </div>
                     <div class="form-actions">
                         <button type="button" class="btn-secondary" id="cancelBookingBtn">İptal</button>
-                        <button type="submit" class="btn-primary">Rezervasyon Yap</button>
+                        <button type="submit" class="btn-primary">
+                            <span class="booking-btn-text">Rezervasyon Yap</span>
+                        </button>
                     </div>
                 </form>
             </div>
